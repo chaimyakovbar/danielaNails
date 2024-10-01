@@ -1,0 +1,58 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.21",
+    "@mui/material": "^5.15.21",
+    "@react-hooks-hub/use-debounce": "^1.1.7",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@turf/turf": "^7.0.0",
+    "@uidotdev/usehooks": "^2.4.1",
+    "add": "^2.0.6",
+    "axios": "^1.7.2",
+    "jotai": "^2.8.3",
+    "mocha": "^10.5.2",
+    "navigation-menu": "^1.0.0",
+    "notistack": "^3.0.1",
+    "ol": "^9.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-query": "^3.39.3",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "5.0.1",
+    "shadcn-ui": "^0.8.0",
+    "turf-polygon": "^1.0.3",
+    "use-debounce": "^10.0.1",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "mocha"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
