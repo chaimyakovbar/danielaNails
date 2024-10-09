@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import { useProductList } from '../../Hooks/UseProducts';
 import { DRESSLIST } from "../../consts/SubjectsList";
-import DialogForImage from "../Dialog";
+import DialogForImage from "../helpers/Dialog";
+import styles from "../../styles/style.module.css";
 
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -16,22 +16,22 @@ const Shop = () => {
 
   return (
     <div>
-      <p style={{ marginLeft: "15px" }}>Dresses for Rent</p>
-      <div style={styles.container}>
-        <div style={styles.cardContainer}>
+      <p className={styles.title}>✨ העבודות שלי</p>
+      <div className={styles.shopContainer}>
+        <div className={styles.cardContainer}>
           {DRESSLIST.map((product) => (
             <div
-              key={product.name}
-              style={styles.card}
+              key={product.id}
+              className={styles.card}
               onClick={() => handleOpenDialog(product)}
             >
               <img
                 src={product.image}
                 alt={product.name}
-                style={styles.image}
+                className={styles.image}
               />
-              <ul style={styles.list}>
-                <li style={styles.listItem}>{product.name}</li>
+              <ul className={styles.list}>
+                <li className={styles.listItem}>{product.name}</li>
               </ul>
             </div>
           ))}
@@ -47,42 +47,6 @@ const Shop = () => {
       )}
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  cardContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "20px",
-  },
-  card: {
-    width: "180px",
-    borderRadius: "8px",
-    backgroundColor: "#fff",
-    overflow: "hidden",
-    cursor: "pointer",
-    textAlign: "center",
-  },
-  image: {
-    width: "100%",
-    height: "330px", // Fixed height
-    objectFit: "cover", // Maintain aspect ratio and cover the container
-  },
-  list: {
-    listStyle: "none",
-    padding: "10px",
-    margin: 0,
-  },
-  listItem: {
-    fontSize: "1rem",
-    marginBottom: "10px",
-  },
 };
 
 export default Shop;

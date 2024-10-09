@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
 import App from './App';
-import './index.css';
+import '../src/styles/index.css';
 
 const queryClient = new QueryClient()
 

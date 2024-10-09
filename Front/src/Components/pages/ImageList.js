@@ -1,63 +1,36 @@
 import * as React from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import { Carousel } from "react-responsive-carousel";
 
-import image1 from "../../assets/image1.jpg";
-import image2 from "../../assets/image2.jpg";
-import image3 from "../../assets/image3.jpg";
-import image4 from "../../assets/image4.jpg";
-import image5 from "../../assets/image5.jpg";
-import image6 from "../../assets/image6.jpg";
-
-function srcset(image, size, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+import image1 from "../../assets/images/new-logo.png";
+import image2 from "../../assets/images/nail-pic.jpeg";
+import image3 from "../../assets/images/nail-pic-2.jpeg";
+import image4 from "../../assets/images/sticks.jpeg";
 
 export default function QuiltedImageList() {
   return (
     <>
-      <div>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            pointerEvents: "none",
-            width: "100%",
-            height: "800px",
-            objectFit: "cover",
-          }}
-        >
-          <source src={require(`../../assets/home2.mp4`)} type="video/mp4" />
-        </video>
-      </div>
-
-      <ImageList
-        sx={{ width: "100%", height: 350 }}
-        variant="quilted"
-        cols={4}
-        rowHeight={121}
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showThumbs={false}
+        showArrows={true}
+        interval={4000}
       >
         {itemData.map((item) => (
-          <ImageListItem
-            key={item.img}
-            cols={item.cols || 1}
-            rows={item.rows || 1}
-          >
+          <div key={item.img}>
             <img
-              {...srcset(item.img, 121, item.rows, item.cols)}
+              src={item.img}
               alt={item.title}
               loading="lazy"
+              style={{
+                width: "100%",
+                height: "400px",
+                objectFit: "contain",
+              }}
             />
-          </ImageListItem>
+          </div>
         ))}
-      </ImageList>
+      </Carousel>
     </>
   );
 }
@@ -66,68 +39,17 @@ const itemData = [
   {
     img: image1,
     title: "image1",
-    rows: 2,
-    cols: 2,
   },
   {
     img: image2,
-    title: "",
-    rows: 1,
-    cols: 0,
+    title: "image2",
   },
   {
     img: image3,
-    title: "",
-    rows: 2,
-    cols: 0,
+    title: "image3",
   },
   {
     img: image4,
-    title: "",
-    rows: 1,
-    cols: 0,
-  },
-  {
-    img: image5,
-    title: "",
-    cols: 2,
-  },
-  {
-    img: image6,
-    title: "",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: image6,
-    title: "",
-  },
-  {
-    img: image6,
-    title: "",
-  },
-  {
-    img: image6,
-    title: "",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: image6,
-    title: "",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: image6,
-    title: "",
-    rows: 1,
-    cols: 2,
-  },
-  {
-    img: image6,
-    title: "",
-    rows: 1,
-    cols: 3,
+    title: "image4",
   },
 ];
