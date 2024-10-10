@@ -37,11 +37,11 @@ const DialogForImage = ({ open, onClose, product }) => {
         <button onClick={onClose} className={styles.closeButton}>
           <Close />
         </button>
-        <Link to={"/contact"} className={styles.contactLink}>
+        {/* <Link to={"/contact"} className={styles.contactLink}>
           <button onClick={onClose} className={styles.contactButton}>
             <Call />
           </button>
-        </Link>
+        </Link> */}
       </DialogActions>
     </Dialog>
   );

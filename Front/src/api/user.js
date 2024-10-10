@@ -1,15 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseurl = 'https://racheldatabase2.onrender.com/users'
+const baseurl = "http://localhost:3005/users";
+export const getUsers = async () => await axios.get(baseurl);
 
-export const getUsers = async () => await axios.get(baseurl)
+export const getUsersTime = async () => {
+  const response = await axios.get(baseurl);
+  return response.data.map((user) => user.time);
+};
 
 export const postUsers = async (data) => {
-    return await axios.post(baseurl, data)
+  return await axios.post(baseurl, data);
 };
 
 export const deleteUsers = async (id) => {
-    return await axios.delete(`${baseurl}/${id}`)
+  return await axios.delete(`${baseurl}/${id}`);
 };
-
-

@@ -1,26 +1,28 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { postUsers } from "../../api/user";
 import styles from "../../styles/style.module.css";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 const Contact = () => {
+  const location = useLocation();
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
+  const [time, setTime] = useState(location.state?.time || "");
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
+  
   const getUsrData = async () => {
-    if (!name || !number) {
-      alert("Please fill in both name and phone number.");
+    if (!name || !phone || !time) {
+      alert("Please fill in both name, phone and date.");
       return;
     }
 
     const data = {
       name,
-      number,
+      time,
+      phone,
       note,
     };
 
@@ -30,7 +32,7 @@ const Contact = () => {
     try {
       await postUsers(data);
       setSuccessMessage("המידע נשלח בהצלחה!");
-      deleteData();
+      clearData();
     } catch (error) {
       console.error("Failed to post user data:", error);
       setSuccessMessage("אירעה שגיאה בשליחת המידע. נסה שוב.");
@@ -39,9 +41,10 @@ const Contact = () => {
     }
   };
 
-  const deleteData = () => {
+  const clearData = () => {
     setName("");
-    setNumber("");
+    setPhone("");
+    setTime("");
     setNote("");
   };
 
@@ -50,7 +53,7 @@ const Contact = () => {
       <Typography m={2} variant="h5" className={styles.feedbackTitle}>
         😊 צרי קשר
       </Typography>
-      <form onSubmit={getUsrData}>
+      <form>
         <Box mb={2}>
           <TextField
             value={name}
@@ -63,8 +66,8 @@ const Contact = () => {
         </Box>
         <Box mb={2}>
           <TextField
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             fullWidth
             label="מספר טלפון"
             variant="outlined"
@@ -84,6 +87,19 @@ const Contact = () => {
             className={styles.feedbackInput}
           />
         </Box>
+
+        <Box mb={2} width={"350px"}>
+          <TextField
+            value={time}
+            fullWidth
+            label="השעה הנבחרת"
+            variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Box>
+
         {isLoading ? (
           <div className={styles.spinnerContainer}>
             <div className={styles.spinner} />
@@ -91,7 +107,6 @@ const Contact = () => {
         ) : (
           <Button
             onClick={getUsrData}
-            type="submit"
             variant="contained"
             className={styles.feedbackButton}
           >

@@ -1,12 +1,18 @@
-const { number } = require("joi");
 const Joi = require("joi-oid");
-const JoiObjectId = require("joi-objectid")(Joi);
 
-const schemaPost = Joi.object().keys({
-  name: Joi.string().min(1).max(30).optional(),
-  number: Joi.number().required(),
-  email: Joi.string().email().required(),
-  note: Joi.array().items(Joi.string()).optional(),
+const userSchema = Joi.object().keys({
+  name: Joi.string().min(1).max(30).required(),
+  time: Joi.string().required(),
+  phone: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .required(),
+  note: Joi.string().optional().allow(""),
 });
 
-module.exports = { schemaPost };
+const feedbackSchema = Joi.object().keys({
+  name: Joi.string().min(1).max(30).required(),
+  image: Joi.string().allow("").uri().optional(),
+  note: Joi.string().optional().allow(""),
+});
+
+module.exports = { userSchema, feedbackSchema };
