@@ -18,7 +18,7 @@ const CardProduct = () => {
             autoPlay={true}
             interval={3000}
             transitionTime={500}
-            onClickItem={() => (window.location.href = "/shop")}
+            onClickItem={() => (window.location.href = "/works")}
           >
             <div>
               <img src={image1} alt="Product" className={styles.cardProductImage} />

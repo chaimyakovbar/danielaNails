@@ -49,7 +49,7 @@ const DrawerNavBar = () => {
       <List>
         {[
           { text: "בית", link: "/", icon: <Home /> },
-          { text: "עבודות", link: "/shop", icon: <Work /> },
+          { text: "עבודות", link: "/works", icon: <Work /> },
           { text: "עלי", link: "/about", icon: <Info /> },
           { text: "צרי קשר", link: "/contact", icon: <Phone /> },
           { text: "לפרגן", link: "/feedback", icon: <Feedback /> },

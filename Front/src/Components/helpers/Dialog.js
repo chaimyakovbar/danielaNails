@@ -1,11 +1,8 @@
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-// import { Link } from "react-router-dom";
-import {Close} from "@mui/icons-material"
 import styles from "../../styles/style.module.css";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";

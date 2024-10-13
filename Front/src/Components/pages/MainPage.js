@@ -5,8 +5,7 @@ import SocialNetworks from "../helpers/SocialNetworks";
 import AccessibilityMenu from "../helpers/AccessibilityMenu";
 import TimeSelection from "../helpers/TimeSelection";
 import FeedbackList from "./FeedbackList";
-import Shop from "./Shop";
-import About from "./About";
+import Works from "./Works";
 
 const MainPage = () => {
   return (
@@ -14,8 +13,7 @@ const MainPage = () => {
       <AccessibilityMenu />
       <ImageList />
       <TimeSelection />
-
-      <Shop />
+      <Works />
       <FeedbackList />
       <SocialNetworks />
     </div>

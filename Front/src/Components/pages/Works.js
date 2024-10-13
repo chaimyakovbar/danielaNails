@@ -3,7 +3,7 @@ import { DRESSLIST } from "../../consts/SubjectsList";
 import DialogForImage from "../helpers/Dialog";
 import styles from "../../styles/style.module.css";
 
-const Shop = () => {
+const Works = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleOpenDialog = (product) => {
@@ -49,4 +49,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Works;
