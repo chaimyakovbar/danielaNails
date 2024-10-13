@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "http://localhost:3005/users";
+const baseurl = "https://daniela-clinic.netlify.app/users";
 export const getUsers = async () => await axios.get(baseurl);
 
 export const getUsersTime = async () => {

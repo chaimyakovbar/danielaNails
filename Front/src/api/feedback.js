@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "http://localhost:3005/feedbacks";
+const baseurl = "https://daniela-clinic.netlify.app/feedbacks";
 
 export const getFeedback = async () => await axios.get(baseurl);
 
