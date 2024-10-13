@@ -12,23 +12,11 @@ const MainPage = () => {
   return (
     <div>
       <AccessibilityMenu />
-      <div id="home">
-        {" "}
-        <ImageList />{" "}
-      </div>
+      <ImageList />
       <TimeSelection />
-      <div id="works">
-        {" "}
-        <Shop />{" "}
-      </div>
-      <div id="about">
-        {" "}
-        <About />
-      </div>
-      <div id="feedback">
-        {" "}
-        <FeedbackList />{" "}
-      </div>
+
+      <Shop />
+      <FeedbackList />
       <SocialNetworks />
     </div>
   );

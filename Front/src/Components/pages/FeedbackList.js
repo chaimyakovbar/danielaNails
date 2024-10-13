@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getFeedback } from "../../api/feedback";
 import styles from "../../styles/style.module.css";
 import DialogForImage from "../helpers/Dialog";
+import { Link } from "react-router-dom";
 
 const FeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -42,7 +43,15 @@ const FeedbackList = () => {
 
   return (
     <div className={styles.newFeedbackContainer}>
-      <h2 className={styles.newFeedbackTitle}>❤️ לקוחות</h2>
+      <div className={styles.feedbackHeader}>
+        <h2 className={styles.newFeedbackTitle}>❤️ לקוחות</h2>
+        <Link className={styles.addFeedbackForm} to={"/feedback"}>
+          <button className={styles.addFeedbackButton}>
+            {window.innerWidth <= 768 ? "+" : "הוספת תגובה"}
+          </button>
+        </Link>
+      </div>
+
       <ul className={styles.newFeedbackList}>
         {feedbacks.map((feedback) => (
           <li key={feedback._id} className={styles.newFeedbackItem}>
@@ -63,6 +72,7 @@ const FeedbackList = () => {
           </li>
         ))}
       </ul>
+
       {selectedProduct && (
         <DialogForImage
           open={!!selectedProduct}

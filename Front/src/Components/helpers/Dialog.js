@@ -4,9 +4,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import { Link } from "react-router-dom";
-import {Call , Close} from "@mui/icons-material"
+// import { Link } from "react-router-dom";
+import {Close} from "@mui/icons-material"
 import styles from "../../styles/style.module.css";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,20 +31,23 @@ const DialogForImage = ({ open, onClose, product }) => {
         },
       }}
     >
+      <IconButton
+        aria-label="close"
+        onClick={onClose}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: 'red',
+          marginBottom: '20px',
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <DialogTitle className={styles.dialogTitle}>{product.name}</DialogTitle>
       <DialogContent className={styles.dialogContent}>
         <img src={product.image} alt={product.name} className={styles.imageDialog} />
       </DialogContent>
-      <DialogActions className={styles.actions}>
-        <button onClick={onClose} className={styles.closeButton}>
-          <Close />
-        </button>
-        {/* <Link to={"/contact"} className={styles.contactLink}>
-          <button onClick={onClose} className={styles.contactButton}>
-            <Call />
-          </button>
-        </Link> */}
-      </DialogActions>
     </Dialog>
   );
 };

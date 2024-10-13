@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import styles from "../../styles/style.module.css";
 import { postFeedback } from "../../api/feedback"; // Import the postFeedback function
 
@@ -9,6 +18,7 @@ const Feedback = () => {
   const [feedback, setFeedback] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +74,25 @@ const Feedback = () => {
     setFeedback("");
   };
 
+  const handleImageUpload = () => {
+    setOpenDialog(true); // Open dialog when user clicks the image button
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false); // Close the dialog
+  };
+
+  const handleImageSelection = (option) => {
+    if (option === "camera") {
+      // Trigger the file input for capturing a photo using the camera
+      document.getElementById("camera-input").click();
+    } else if (option === "upload") {
+      // Trigger the normal file upload input
+      document.getElementById("image-upload").click();
+    }
+    handleDialogClose(); // Close the dialog after selection
+  };
+
   return (
     <Box className={styles.feedbackContainer}>
       <Typography variant="h5" className={styles.feedbackTitle}>
@@ -71,6 +100,14 @@ const Feedback = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box m={2}>
+          <Button
+            variant="contained"
+            component="span"
+            onClick={handleImageUpload}
+          >
+            העלי תמונה (אפשרות)
+          </Button>
+          {/* Hidden input for file upload */}
           <input
             accept="image/*"
             style={{ display: "none" }}
@@ -78,11 +115,15 @@ const Feedback = () => {
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
           />
-          <label htmlFor="image-upload">
-            <Button variant="contained" component="span">
-              העלי תמונה (אפשרות)
-            </Button>
-          </label>
+          {/* Hidden input for camera capture */}
+          <input
+            accept="image/*"
+            style={{ display: "none" }}
+            id="camera-input"
+            type="file"
+            capture="environment" // This will open the back camera by default
+            onChange={(e) => setImage(e.target.files[0])}
+          />
         </Box>
         <Box mb={2}>
           <TextField
@@ -114,6 +155,22 @@ const Feedback = () => {
       </form>
       {isLoading && <p>Submitting feedback...</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+
+      {/* Dialog for selecting image source */}
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>בחירת תמונה</DialogTitle>
+        <DialogContent>
+          <Typography>? מה ברצונך לעשות</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleImageSelection("camera")}>
+            צלם תמונה
+          </Button>
+          <Button onClick={() => handleImageSelection("upload")}>
+            העלי מהמכשיר
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

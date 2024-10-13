@@ -100,7 +100,7 @@
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
+  width: 100%;
   margin: 0 auto;
   font-family: "Varela Round", sans-serif;
   color: #333;
@@ -169,12 +169,16 @@
 }
 
 /* About.js */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
 .sectionWrapper {
   background-color: #f8f9fa;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -402,6 +406,13 @@
 }
 
 /* feedback list */
+.feedbackHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .newFeedbackContainer {
   padding: 20px;
   background-color: #f0f4f8;
@@ -452,10 +463,71 @@
 
 .newFeedbackText {
   display: flex;
-  flex-direction: column; /* Stack name and note vertically */
+  flex-direction: column;
 }
 
 .newFeedbackNote {
   color: #555;
   flex-grow: 1;
+}
+.addFeedbackButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addFeedbackButton:hover {
+  background-color: #0056b3;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .shopContainer {
+    padding: 0;
+    margin: 0;
+  }
+
+  .cardContainer {
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .policyWrapper,
+  .sectionWrapper,
+  .feedbackContainer,
+  .newFeedbackContainer {
+    padding: 20px;
+    margin: 0;
+    width: calc(100% - 40px);
+  }
+
+  .title,
+  .titlePolicy,
+  .titleAbout,
+  .feedbackTitle,
+  .newFeedbackTitle {
+    font-size: 24px;
+  }
+
+  .feedbackInput,
+  .feedbackTextarea {
+    font-size: 14px;
+    width: calc(100% - 20px);
+  }
 }

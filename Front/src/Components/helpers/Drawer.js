@@ -49,16 +49,15 @@ const DrawerNavBar = () => {
       <List>
         {[
           { text: "בית", link: "/", icon: <Home /> },
-          { text: "עבודות", link: "shop", icon: <Work /> },
-          { text: "עלי", link: "about", icon: <Info /> },
+          { text: "עבודות", link: "/shop", icon: <Work /> },
+          { text: "עלי", link: "/about", icon: <Info /> },
           { text: "צרי קשר", link: "/contact", icon: <Phone /> },
-          { text: "לפרגן", link: "feedback", icon: <Feedback /> },
+          { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
         ].map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
               component={Link}
               to={item.link}
-              smooth={true}
               duration={500}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
