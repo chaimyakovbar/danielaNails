@@ -43,7 +43,7 @@ const NavBar = () => {
           to="/"
           style={{
             textDecoration: "none",
-            color: "inherit",
+            color: "#BA605D",
             paddingRight: "40px",
           }}
         >

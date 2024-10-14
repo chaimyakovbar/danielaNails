@@ -36,7 +36,7 @@ const TimeSelection = () => {
   }, []);
 
   const handleTimeChange = (newValue) => {
-    if (!newValue || !selectedDate) return
+    if (!newValue || !selectedDate) return;
 
     const formattedDateTime = `${selectedDate.format(
       "MMMM D, YYYY"
@@ -82,7 +82,7 @@ const TimeSelection = () => {
             sx={{
               width: { xs: "100%", md: "50%" },
               borderRadius: "12px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+              boxShadow: { xs: "none", md: "0 4px 10px rgba(0, 0, 0, 0.1)" }, // Updated to remove box shadow in phone view
             }}
           />
           {window.innerWidth < 600 ? (

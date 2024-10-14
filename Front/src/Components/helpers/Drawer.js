@@ -55,12 +55,8 @@ const DrawerNavBar = () => {
           { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
         ].map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton
-              component={Link}
-              to={item.link}
-              duration={500}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemButton component={Link} to={item.link} duration={500}>
+              <ListItemIcon sx={{ color: "#BA605D" }}>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
@@ -72,7 +68,7 @@ const DrawerNavBar = () => {
 
   return (
     <div>
-      <Button sx={{ color: "gray" }} onClick={toggleDrawer("right", true)}>
+      <Button sx={{ color: "#BA605D" }} onClick={toggleDrawer("right", true)}>
         <ViewHeadline />
       </Button>
       <Drawer
