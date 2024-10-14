@@ -8,51 +8,51 @@ import {
   Mail,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+
+const socialItems = [
+  {
+    icon: <LocationOn />,
+    link: "https://waze.com/ul/hsv8y882hk",
+    text: "Bnei Brak",
+  },
+  {
+    icon: <Instagram />,
+    link: "https://www.instagram.com/daniela_clinic?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    text: "daniela_clinic",
+  },
+  {
+    icon: <LocalPhone />,
+    link: "tel:054-345-0977",
+    text: "054-345-0977",
+  },
+  {
+    icon: <WhatsApp />,
+    link: "https://api.whatsapp.com/send?phone=972543450977&text=אני+מעונינת+בפרטים+על+שמלה+",
+    text: "054-345-0977",
+  },
+  {
+    icon: <Mail />,
+    link: "mailto:michaelhalperin2@gmail.com",
+    text: "michaelhalperin2@gmail.com",
+  },
+];
 
 const SocialNetworks = () => {
   return (
     <div className={styles.socialContainer}>
-      <div className={styles.iconContainer}>
-        <div className={styles.iconItem}>
-          <LocationOn />
-          <a href="https://waze.com/ul/hsv8y882hk" className={styles.link}>
-            Bnei Brak
-          </a>
-        </div>
-        <div className={styles.iconItem}>
-          <Instagram />
-          <a
-            href="https://www.instagram.com/daniela_clinic?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            className={styles.link}
-          >
-            daniela_clinic
-          </a>
-        </div>
-
-        <div className={styles.iconItem}>
-          <LocalPhone />
-          <a href="tel:054-345-0977" className={styles.link}>
-            054-345-0977
-          </a>
-        </div>
-
-        <div className={styles.iconItem}>
-          <WhatsApp />
-          <a
-            href="https://api.whatsapp.com/send?phone=972543450977&text=אני+מעונינת+בפרטים+על+שמלה+"
-            className={styles.link}
-          >
-            054-345-0977
-          </a>
-        </div>
-
-        <div className={styles.iconItem}>
-          <Mail />
-          <a href="mailto:michaelhalperin2@gmail.com" className={styles.link}>
-            michaelhalperin2@gmail.com
-          </a>
-        </div>
-      </div>
+      <List className={styles.iconContainer}>
+        {socialItems.map((item, index) => (
+          <ListItem className={styles.iconItem} key={index}>
+            <ListItemIcon sx={{ color: "#BA605D" }}>{item.icon}</ListItemIcon>
+            <ListItemText>
+              <a href={item.link} className={styles.link}>
+                {item.text}
+              </a>
+            </ListItemText>
+          </ListItem>
+        ))}
+      </List>
       <Link className={styles.policyLink} to={"/PolicySupport"}>
         Policy Support
       </Link>

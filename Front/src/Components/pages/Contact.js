@@ -12,7 +12,7 @@ const Contact = () => {
   const [time, setTime] = useState(location.state?.time || "");
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  
+
   const getUsrData = async () => {
     if (!name || !phone || !time) {
       alert("Please fill in both name, phone and date.");

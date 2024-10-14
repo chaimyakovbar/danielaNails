@@ -8,7 +8,8 @@ import Contact from './Components/pages/Contact'
 import MainPage from './Components/pages/MainPage'
 import NavBar from './Components/helpers/NavBar'
 import PolicySupport from './Components/pages/PolicySupport'
-import Feedback from './Components/pages/Feedback';
+import Feedback from './Components/pages/Feedback'
+import AdminNotification from './Components/pages/AdminNotification'; // Import the new component
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/admin" element={<AdminNotification />} /> {/* Add the new route */}
       </Routes>
     </Router>
 

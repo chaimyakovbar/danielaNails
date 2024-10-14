@@ -16,7 +16,7 @@
     "@turf/turf": "^7.0.0",
     "@uidotdev/usehooks": "^2.4.1",
     "add": "^2.0.6",
-    "add-to-calendar-button-react": "^2.6.19",
+    "add-to-calendar-button-react": "^2.7.2",
     "axios": "^1.7.2",
     "dayjs": "^1.11.13",
     "jotai": "^2.8.3",

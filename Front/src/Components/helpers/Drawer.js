@@ -53,6 +53,7 @@ const DrawerNavBar = () => {
           { text: "עלי", link: "/about", icon: <Info /> },
           { text: "צרי קשר", link: "/contact", icon: <Phone /> },
           { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
+          { text: "admin", link: "/admin", icon: <Feedback /> },
         ].map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.link} duration={500}>
