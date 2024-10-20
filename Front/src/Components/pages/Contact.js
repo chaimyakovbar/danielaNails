@@ -32,10 +32,11 @@ const Contact = () => {
     try {
       await postUsers(data);
       setSuccessMessage("המידע נשלח בהצלחה!");
+      console.log(data);
       clearData();
     } catch (error) {
       console.error("Failed to post user data:", error);
-      setSuccessMessage("אירעה שגיאה בשליחת המידע. נסה שוב.");
+      setSuccessMessage("אירעה שגיאה בשליחת המידע.");
     } finally {
       setIsLoading(false);
     }

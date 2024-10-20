@@ -9,11 +9,11 @@ const internal = {
   db: null,
 };
 
-// פונקציה שמתחברת למסד הנתונים
+// function to connect to the DB
 const connectToDB = async () => {
   try {
     await client.connect();
-    internal.db = client.db(process.env.DB_NAME); // שומר את החיבור למסד הנתונים
+    internal.db = client.db(process.env.DB_NAME); // save the connection
     return internal.db;
   } catch (error) {
     console.error("Database connection error:", error);
@@ -26,7 +26,8 @@ const getDB = () => {
 
 const getDbWithCollection = (collection) => {
   if (internal.db) {
-    return internal.db.collection(collection); // מחזיר אוסף מהמסד נתונים
+    console.log(internal.db.collection(collection));
+    return internal.db.collection(collection); // return the collcetion
   } else {
     throw new Error("Database is not connected");
   }

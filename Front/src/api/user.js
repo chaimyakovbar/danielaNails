@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseurl = "https://daniela-clinic.onrender.com/users";
+
 export const getUsers = async () => await axios.get(baseurl);
 
 export const getUsersTime = async () => {

@@ -28,7 +28,7 @@ const socialItems = [
   },
   {
     icon: <WhatsApp />,
-    link: "https://api.whatsapp.com/send?phone=972543450977&text=אני+מעונינת+בפרטים+על+שמלה+",
+    link: "https://api.whatsapp.com/send?phone=972543450977&text=אני+מעונינת+לקבוע+תור+",
     text: "054-345-0977",
   },
   {

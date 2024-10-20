@@ -3,10 +3,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "../../styles/style.module.css";
 
-import image1 from "../../assets/images/new-logo.png";
-import image2 from "../../assets/images/nail-pic.jpeg";
-import image3 from "../../assets/images/nail-pic-2.jpeg";
-import image4 from "../../assets/images/sticks.jpeg";
+// import image1 from "../../assets/images/new-logo.png";
+import image2 from "../../assets/images/nail-head-1.png";
+import image3 from "../../assets/images/nail-head-2.jpg";
+import image4 from "../../assets/images/nail-head-3.jpg";
 
 const CardProduct = () => {
   return (
@@ -29,8 +29,8 @@ const CardProduct = () => {
                   loading="lazy"
                   style={{
                     width: "100%",
-                    height: "400px",
-                    objectFit: "contain",
+                    height: "500px",
+                    objectFit: "cover",
                   }}
                 />
               </div>
@@ -43,10 +43,10 @@ const CardProduct = () => {
 };
 
 const itemData = [
-  {
-    img: image1,
-    title: "image1",
-  },
+  // {
+  //   img: image1,
+  //   title: "image1",
+  // },
   {
     img: image2,
     title: "image2",

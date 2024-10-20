@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DrawerNavBAr from "./Drawer";
-import logo from "../../assets/logo3.jpg";
+// import logo from "../../assets/logo3.png";
 
 const NavBar = () => {
   return (
@@ -17,7 +17,7 @@ const NavBar = () => {
           zIndex: 1000,
           backgroundColor: "#fff",
           padding: "10px 0",
-          boxShadow: "0px 2px 4pxrgba(0, 0, 0, 0.1)",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Link
@@ -32,11 +32,11 @@ const NavBar = () => {
             className="logo"
             style={{ border: "none", background: "none", cursor: "pointer" }}
           >
-            <img
+            {/* <img
               src={logo}
               alt="Logo"
-              style={{ height: "40px", width: "100px" }}
-            />
+              style={{ height: "150px", width: "250px" }}
+            /> */}
           </button>
         </Link>
         <Link
@@ -45,6 +45,8 @@ const NavBar = () => {
             textDecoration: "none",
             color: "#BA605D",
             paddingRight: "40px",
+            fontFamily: "StyleScript",
+            fontSize: "28px",
           }}
         >
           Daniela Clinic

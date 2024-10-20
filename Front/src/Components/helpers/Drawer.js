@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Drawer,
@@ -17,6 +18,8 @@ import {
   Info,
   Phone,
   Feedback,
+  Login,
+  AdminPanelSettings,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -27,6 +30,12 @@ const DrawerNavBar = () => {
     bottom: false,
     right: false,
   });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -39,6 +48,24 @@ const DrawerNavBar = () => {
     setState({ ...state, [anchor]: open });
   };
 
+  const menuItems = [
+    { text: "בית", link: "/", icon: <Home /> },
+    { text: "עבודות", link: "/works", icon: <Work /> },
+    { text: "עלי", link: "/about", icon: <Info /> },
+    { text: "צרי קשר", link: "/contact", icon: <Phone /> },
+    { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
+  ];
+
+  if (isLoggedIn) {
+    menuItems.push({
+      text: "Admin",
+      link: "/admin",
+      icon: <AdminPanelSettings />,
+    });
+  } else {
+    menuItems.push({ text: "התחברות", link: "/auth", icon: <Login /> });
+  }
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -47,14 +74,7 @@ const DrawerNavBar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[
-          { text: "בית", link: "/", icon: <Home /> },
-          { text: "עבודות", link: "/works", icon: <Work /> },
-          { text: "עלי", link: "/about", icon: <Info /> },
-          { text: "צרי קשר", link: "/contact", icon: <Phone /> },
-          { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
-          { text: "admin", link: "/admin", icon: <Feedback /> },
-        ].map((item) => (
+        {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.link} duration={500}>
               <ListItemIcon sx={{ color: "#BA605D" }}>{item.icon}</ListItemIcon>

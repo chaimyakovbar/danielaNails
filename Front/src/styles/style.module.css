@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "StyleScript";
+  src: url("../assets/fonts/StyleScript-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 /* Shop.js */
 .title {
   color: #007aff;
@@ -31,7 +37,7 @@
 
 .image {
   width: 100%;
-  height: 330px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -592,5 +598,25 @@
 
 .errorText {
   color: #ff4d4f;
+  font-weight: bold;
+}
+
+/* Auth.js */
+.authContainer {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.authButton {
+  margin-top: 20px !important;
+}
+
+.authMessage {
+  margin-top: 20px;
+  text-align: center;
   font-weight: bold;
 }
