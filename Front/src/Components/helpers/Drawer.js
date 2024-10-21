@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Drawer,
@@ -22,20 +21,13 @@ import {
   AdminPanelSettings,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
 
 const DrawerNavBar = () => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
+  const { isAuthenticated } = useContext(AuthContext);
+  const [state, setState] = useState({
     right: false,
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    setIsLoggedIn(!!token);
-  }, []);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -56,7 +48,7 @@ const DrawerNavBar = () => {
     { text: "לפרגן", link: "/feedback", icon: <Feedback /> },
   ];
 
-  if (isLoggedIn) {
+  if (isAuthenticated) {
     menuItems.push({
       text: "Admin",
       link: "/admin",

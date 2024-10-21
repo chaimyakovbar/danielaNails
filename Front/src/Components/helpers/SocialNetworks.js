@@ -33,8 +33,8 @@ const socialItems = [
   },
   {
     icon: <Mail />,
-    link: "mailto:michaelhalperin2@gmail.com",
-    text: "michaelhalperin2@gmail.com",
+    link: "mailto:Danielaelish@gmail.com",
+    text: "Danielaelish@gmail.com",
   },
 ];
 
@@ -59,7 +59,8 @@ const SocialNetworks = () => {
       <Link to="/" className={styles.link}>
         <button className={styles.button}>
           <p className={styles.footerText}>
-            All Rights reserved © 2024 Showroom By daniela clinic
+            All Rights reserved © 2024 Showroom By daniela clinic --- 
+            <strong>Created by McdWebs</strong>
           </p>
         </button>
       </Link>
