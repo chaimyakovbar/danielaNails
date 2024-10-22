@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { 
+  // useContext,
+   useState } from "react";
 import {
   Box,
   Drawer,
@@ -21,7 +23,7 @@ import {
   AdminPanelSettings,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../helpers/AuthContext";
+// import { AuthContext } from "../helpers/AuthContext";
 
 const DrawerNavBar = () => {
   // const { isAuthenticated } = useContext(AuthContext);
