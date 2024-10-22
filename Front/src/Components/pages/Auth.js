@@ -30,7 +30,7 @@ const Auth = () => {
         const response = await checkAuthStatus();
         if (response.data.success) {
           setIsAuthenticated(true);
-          navigate("/admin"); 
+          navigate("/admin");
         } else {
           setIsAuthenticated(false);
         }
@@ -40,7 +40,7 @@ const Auth = () => {
     };
 
     checkAuth();
-  }, [setIsAuthenticated]);
+  }, [setIsAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
