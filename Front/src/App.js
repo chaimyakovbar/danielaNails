@@ -39,7 +39,8 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/feedback" element={<Feedback />} />
-          <Route
+          <Route path="/admin" element={<AdminNotification />} />
+          {/* <Route
             path="/admin"
             element={
               <ProtectedRoute>
@@ -47,7 +48,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth" element={<Auth />} /> */}
         </Routes>
       </Router>
     </AuthProvider>

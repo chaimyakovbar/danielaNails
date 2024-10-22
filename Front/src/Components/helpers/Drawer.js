@@ -24,7 +24,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
 
 const DrawerNavBar = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  // const { isAuthenticated } = useContext(AuthContext);
+  const isAuthenticated = true;
   const [state, setState] = useState({
     right: false,
   });
