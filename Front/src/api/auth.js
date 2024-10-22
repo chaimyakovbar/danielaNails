@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "http://localhost:3005/admins";
+const baseurl = "https://daniela-clinic.onrender.com/admins";
 
 export const login = async (data) => {
   return await axios.post(`${baseurl}/login`, data, { withCredentials: true });
