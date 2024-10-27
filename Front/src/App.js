@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  // Navigate,
+  Navigate,
 } from "react-router-dom";
-import { AuthProvider,
-  //  AuthContext
-   } from "./Components/helpers/AuthContext";
+import { AuthProvider, AuthContext } from "./Components/helpers/AuthContext";
 
 import Works from "./Components/pages/Works";
 import About from "./Components/pages/About";
@@ -17,17 +15,17 @@ import NavBar from "./Components/helpers/NavBar";
 import PolicySupport from "./Components/pages/PolicySupport";
 import Feedback from "./Components/pages/Feedback";
 import AdminNotification from "./Components/pages/AdminNotification";
-// import Auth from "./Components/pages/Auth";
+import Auth from "./Components/pages/Auth";
 
-// const ProtectedRoute = ({ children }) => {
-//   const { isAuthenticated, loading } = useContext(AuthContext);
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useContext(AuthContext);
 
-//   if (loading) {
-//     return <div>Loading...</div>;
-//   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-//   return isAuthenticated ? children : <Navigate to="/auth" />;
-// };
+  return isAuthenticated ? children : <Navigate to="/auth" />;
+};
 
 const App = () => {
   return (
@@ -42,7 +40,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/admin" element={<AdminNotification />} />
-          {/* <Route
+          <Route
             path="/admin"
             element={
               <ProtectedRoute>
@@ -50,7 +48,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/auth" element={<Auth />} /> */}
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -9,8 +9,17 @@ export const getUsersTime = async () => {
   return response.data.map((user) => user.time);
 };
 
+export const getUsersStatus = async () => {
+  const response = await axios.get(baseurl);
+  return response.data.map((user) => user.status);
+};
+
 export const postUsers = async (data) => {
   return await axios.post(baseurl, data);
+};
+
+export const updateUser = async (id, data) => {
+  return await axios.put(`${baseurl}/${id}`, data);
 };
 
 export const deleteUsers = async (id) => {

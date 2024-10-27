@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { postUsers } from "../../api/user";
 import styles from "../../styles/style.module.css";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { postUsers } from "../../api/user";
 
 const Contact = () => {
   const location = useLocation();
@@ -10,37 +10,7 @@ const Contact = () => {
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
   const [time, setTime] = useState(location.state?.time || "");
-  const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
-  const getUsrData = async () => {
-    if (!name || !phone || !time) {
-      alert("Please fill in both name, phone and date.");
-      return;
-    }
-
-    const data = {
-      name,
-      time,
-      phone,
-      note,
-    };
-
-    setIsLoading(true);
-    setSuccessMessage("");
-
-    try {
-      await postUsers(data);
-      setSuccessMessage("המידע נשלח בהצלחה!");
-      console.log(data);
-      clearData();
-    } catch (error) {
-      console.error("Failed to post user data:", error);
-      setSuccessMessage("אירעה שגיאה בשליחת המידע.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const clearData = () => {
     setName("");
@@ -49,12 +19,37 @@ const Contact = () => {
     setNote("");
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !phone || !time) {
+      alert("Please fill in both name, phone and date.");
+      return;
+    }
+
+    const data = {
+      name,
+      phone,
+      note,
+      time,
+      status: "pending",
+    };
+
+    try {
+      await postUsers(data);
+      setSuccessMessage("הבקשה נשלחה ומחכה לאישור");
+      clearData();
+    } catch (error) {
+      console.error("Failed to submit request:", error);
+      setSuccessMessage("ארעה שגיאה , אנא נסי שנית מאוחר יותר");
+    }
+  };
+
   return (
     <Box className={styles.feedbackContainer}>
       <Typography m={2} variant="h5" className={styles.feedbackTitle}>
         😊 צרי קשר
       </Typography>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Box mb={2}>
           <TextField
             value={name}
@@ -100,20 +95,13 @@ const Contact = () => {
             }}
           />
         </Box>
-
-        {isLoading ? (
-          <div className={styles.spinnerContainer}>
-            <div className={styles.spinner} />
-          </div>
-        ) : (
-          <Button
-            onClick={getUsrData}
-            variant="contained"
-            className={styles.feedbackButton}
-          >
-            אישור
-          </Button>
-        )}
+        <Button
+          type="submit"
+          variant="contained"
+          className={styles.feedbackButton}
+        >
+          אישור
+        </Button>
         {successMessage && (
           <p className={styles.successMessage}>{successMessage}</p>
         )}

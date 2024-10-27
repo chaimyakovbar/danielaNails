@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "StyleScript";
-  src: url("../assets/fonts/StyleScript-Regular.ttf") format("truetype");
+  font-family: 'StyleScript';
+  src: url('../assets/fonts/StyleScript-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -92,7 +92,7 @@
   text-decoration: none;
   font-size: 14px;
   padding: 10px 20px;
-  background-color: black;
+  background-color: #BA605D;
   color: white;
   border-radius: 5px;
   text-align: center;
@@ -293,8 +293,9 @@
   color: white;
   border-radius: 20px;
   padding: 10px 20px;
-  margin-right: 20px;
+  margin: 0 20px 0 20px;
   text-transform: none;
+  width: 95%;
 }
 
 /* CardProduct.js */
@@ -517,8 +518,8 @@
   .feedbackContainer,
   .newFeedbackContainer {
     padding: 20px;
-    margin: 0;
-    width: calc(100% - 40px);
+    margin: 0 20px 0 20px;
+    width: calc(95% - 60px);
   }
 
   .title,
@@ -601,7 +602,7 @@
   font-weight: bold;
 }
 
-/* Auth.js */
+/* ZZ */
 .authContainer {
   max-width: 400px;
   margin: 40px auto;

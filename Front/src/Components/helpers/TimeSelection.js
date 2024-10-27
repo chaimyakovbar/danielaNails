@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import {
-  DateCalendar,
-  DigitalClock,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import { Box, IconButton, TextField, Typography } from "@mui/material";
-
+import dayjs from "dayjs";
 import styles from "../../styles/style.module.css";
+import { getUsersTime, getUsers } from "../../api/user";
 import HorizontalTimePicker from "./HorizontalTimePicker";
-import { getUsersTime } from "../../api/user";
 
 const TimeSelection = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [occupiedTimes, setOccupiedTimes] = useState([]);
+  const [dailyAvailableTimes, setDailyAvailableTimes] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOccupiedTimes = async () => {
       try {
-        const times = await getUsersTime();
-        setOccupiedTimes(times);
+        const usersResponse = await getUsers();
+        const users = usersResponse.data || [];
+
+        const confirmedTimes = users
+          .filter((user) => user.status === "confirmed" && user.time)
+          .map((user) => `${user.time}`);
+        setOccupiedTimes(confirmedTimes);
       } catch (error) {
         console.error("Error fetching user times:", error);
       }
@@ -35,39 +35,68 @@ const TimeSelection = () => {
     fetchOccupiedTimes();
   }, []);
 
-  const handleTimeChange = (newValue) => {
-    if (!newValue || !selectedDate) return;
+  const generateDailyAvailableTimes = () => {
+    const dailyTimes = {};
+    const startHour = 9;
+    const endHour = 17;
 
-    const formattedDateTime = `${selectedDate.format(
-      "MMMM D, YYYY"
-    )} at ${newValue.format("H:mm")}`;
-    if (occupiedTimes.includes(formattedDateTime)) {
-      setErrorMessage("😇 שעה זו כבר תפוסה לצערי 🥲 ,נסי שעה אחרת");
-    } else {
-      setErrorMessage("");
-      setSelectedTime(newValue);
+    for (let day = 0; day < 7; day++) {
+      const date = dayjs().add(day, "day").startOf("day");
+      const formattedDate = date.format("MMMM D, YYYY");
+
+      dailyTimes[formattedDate] = [];
+      for (let hour = startHour; hour < endHour; hour++) {
+        for (let minute = 0; minute < 60; minute += 30) {
+          const time = date.hour(hour).minute(minute);
+          const formattedDateTime = `${formattedDate} at ${time.format(
+            "H:mm"
+          )}`;
+
+          if (!occupiedTimes.includes(formattedDateTime)) {
+            dailyTimes[formattedDate].push(time);
+          }
+        }
+      }
+
+      if (dailyTimes[formattedDate].length === 0) {
+        dailyTimes[formattedDate] = ["No available times"];
+      }
     }
+    setDailyAvailableTimes(dailyTimes);
   };
 
-  const formattedDateTime = () => {
-    if (selectedDate && selectedTime) {
-      return `${selectedDate.format("MMMM D, YYYY")} at ${selectedTime.format(
-        "H:mm"
-      )}`;
+  useEffect(() => {
+    if (occupiedTimes.length > 0) {
+      generateDailyAvailableTimes();
     }
-    return "";
+  }, [occupiedTimes]);
+
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue);
+    setSelectedTime(null);
+    setErrorMessage("");
+  };
+
+  const handleTimeSelect = (time) => {
+    setSelectedTime(time);
   };
 
   const handleConfirm = () => {
-    navigate("/contact", {
-      state: { time: formattedDateTime() },
-    });
+    const formattedDateTime =
+      selectedDate && selectedTime
+        ? `${selectedDate.format("MMMM D, YYYY")} at ${selectedTime.format(
+            "H:mm"
+          )}`
+        : "";
+    navigate("/contact", { state: { time: formattedDateTime } });
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box className={styles.timeSelectionContainer}>
-        <h2 className={styles.timeSelectionTitle}>😊 בחרי בשעה הנוחה לך</h2>
+        <h2 className={styles.timeSelectionTitle}>
+          😊 בחרי ביום ובשעה הנוחה לך
+        </h2>
         <Box
           sx={{
             display: "flex",
@@ -78,69 +107,70 @@ const TimeSelection = () => {
         >
           <DateCalendar
             date={selectedDate}
-            onChange={(newValue) => setSelectedDate(newValue)}
+            onChange={handleDateChange}
+            minDate={dayjs()}
             sx={{
               width: { xs: "100%", md: "50%" },
               borderRadius: "12px",
-              boxShadow: { xs: "none", md: "0 4px 10px rgba(0, 0, 0, 0.1)" }, // Updated to remove box shadow in phone view
+              boxShadow: { xs: "none", md: "0 4px 10px rgba(0, 0, 0, 0.1)" },
             }}
           />
-          {window.innerWidth < 600 ? (
-            <HorizontalTimePicker
-              value={selectedTime}
-              onChange={(newValue) => handleTimeChange(newValue)}
-              sx={{ width: "100%", marginTop: { xs: "10px", md: "0" } }}
-            />
-          ) : (
-            <Box
-              sx={{
-                overflowX: "auto",
-                width: { xs: "100%", md: "25%" },
-                marginTop: { xs: "10px", md: "0" },
-              }}
-            >
-              <DigitalClock
-                value={selectedTime}
-                onChange={(newValue) => handleTimeChange(newValue)}
-                ampm={false}
-                sx={{ width: "100%" }}
-              />
-            </Box>
-          )}
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {errorMessage && (
-            <Typography color="error" sx={{ marginBottom: "10px" }}>
-              {errorMessage}
-            </Typography>
-          )}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <TextField
-              value={formattedDateTime()}
-              variant="outlined"
-              sx={{
-                marginBottom: "20px",
-                minWidth: "250px",
-                marginRight: "10px",
-              }}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <IconButton
-              variant="contained"
-              onClick={handleConfirm}
-              sx={{ marginBottom: "20px" }}
-            >
-              <ArrowForwardIcon sx={{ color: "#007aff" }} />
-            </IconButton>
+          <Box
+            sx={{
+              width: { xs: "100%", md: "25%" },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {selectedDate && (
+              <>
+                <Typography variant="h6">זמני פגישה זמינים:</Typography>
+                <HorizontalTimePicker
+                  times={dailyAvailableTimes[
+                    selectedDate.format("MMMM D, YYYY") || []
+                  ].filter(
+                    (time) =>
+                      !occupiedTimes.includes(
+                        `${selectedDate.format("MMMM D, YYYY")} at ${time}`
+                      )
+                  )}
+                  selectedTime={selectedTime}
+                  onTimeSelect={handleTimeSelect}
+                />
+              </>
+            )}
+            {errorMessage && (
+              <Typography color="error" sx={{ marginBottom: 2 }}>
+                {errorMessage}
+              </Typography>
+            )}
           </Box>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <TextField
+            value={
+              selectedDate && selectedTime
+                ? `${selectedDate.format(
+                    "MMMM D, YYYY"
+                  )} at ${selectedTime.format("H:mm")}`
+                : ""
+            }
+            variant="outlined"
+            sx={{
+              marginBottom: "20px",
+              minWidth: "250px",
+              marginRight: "10px",
+            }}
+            InputProps={{ readOnly: true }}
+          />
+          <IconButton
+            variant="contained"
+            onClick={handleConfirm}
+            sx={{ marginBottom: "20px" }}
+          >
+            <ArrowForwardIcon sx={{ color: "#007aff" }} />
+          </IconButton>
         </Box>
       </Box>
     </LocalizationProvider>

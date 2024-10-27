@@ -1,5 +1,5 @@
 import React from "react";
-import CardProduct from "../helpers/CardProduct";
+import CarouselImages from "../helpers/CarouselImages";
 import SocialNetworks from "../helpers/SocialNetworks";
 import AccessibilityMenu from "../helpers/AccessibilityMenu";
 import TimeSelection from "../helpers/TimeSelection";
@@ -10,7 +10,7 @@ const MainPage = () => {
   return (
     <div>
       <AccessibilityMenu />
-      <CardProduct />
+      <CarouselImages />
       <TimeSelection />
       <Works />
       <FeedbackList />

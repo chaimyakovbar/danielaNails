@@ -15,7 +15,7 @@ const Works = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: "25px" }}>
       <p className={styles.title}>✨ העבודות שלי</p>
       <div className={styles.shopContainer}>
         <div className={styles.cardContainer}>

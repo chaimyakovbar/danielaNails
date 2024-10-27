@@ -120,24 +120,27 @@ export default AccessibilityMenu;
 // Styled Components
 const MenuContainer = styled.div`
   position: fixed;
-  top: 120px;
+  bottom: 20px;
+  right: 20px;
   z-index: 1000;
 `;
 
 const MenuButton = styled.button`
-  background-color: black;
+  background-color: #ba605d;
   color: white;
   border: none;
-  border-radius: 0px 30px 30px 0px;
-  padding: 10px 20px;
-  font-size: 16px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &:hover {
-    background-color: #333;
+    background-color: #a34f4c;
   }
 `;
 

@@ -24,15 +24,13 @@ const loginHandler = async (req, res) => {
       { id: admin._id, username: admin.username },
       process.env.JWT_SECRET,
       {
-        expiresIn: "24h", // Adjust as needed
+        expiresIn: "24h",
       }
     );
-
-    // Set HTTP-only cookie with the token
     res.cookie("authToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
-      sameSite: "Strict", // Strict cookie policy
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
       maxAge: 24 * 60 * 60 * 1000, // Set expiration time (e.g., 24 hours)
     });
 

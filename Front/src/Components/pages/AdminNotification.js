@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getUsers, deleteUsers } from "../../api/user";
+import { getUsers, deleteUsers, updateUser } from "../../api/user";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, Button } from "@mui/material";
 import styles from "../../styles/style.module.css";
 import dayjs from "dayjs";
 
 const AdminNotification = () => {
   const [contacts, setContacts] = useState([]);
-  const isPhoneView = useMediaQuery('(max-width:600px)'); // Check if in phone view
+  const isPhoneView = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const fetchContacts = async () => {
       try {
         const response = await getUsers();
+        // const pendingContacts = response.data.filter(contact => contact.status === "pending");
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -57,6 +58,25 @@ const AdminNotification = () => {
     }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
   };
 
+  const handleConfirmAppointment = async (contact) => {
+    const data = {
+      name: contact.name,
+      time: contact.time,
+      phone: contact.phone,
+      note: contact.note,
+      status: "confirmed",
+    };
+
+    try {
+      await updateUser(contact._id, data);
+      console.log("Appointment confirmed:", data);
+      setContacts(contacts.filter((c) => c._id !== contact._id));
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to confirm appointment:", error);
+    }
+  };
+
   return (
     <>
       <Typography className={styles.adminNotificationTitle}>
@@ -68,20 +88,37 @@ const AdminNotification = () => {
           return (
             <Box key={contact._id} className={styles.contactItem}>
               {date && startTime ? (
-                <AddToCalendarButton
-                  className={styles.addToCalendarButton}
-                  name="Appointment"
-                  startDate={date}
-                  startTime={startTime}
-                  endTime={endTime}
-                  location="Daniela Clinic"
-                  options={["Apple", "Google", "Outlook.com"]}
-                  timeZone="Asia/Jerusalem"
-                  description={contact.note}
-                  hideTextLabelButton={isPhoneView}
-                  label="הוספה ליומן"
-                  onClick={() => handleAddToCalendar(contact)}
-                />
+                <>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                  >
+                    <AddToCalendarButton
+                      className={styles.addToCalendarButton}
+                      name="Appointment"
+                      startDate={date}
+                      startTime={startTime}
+                      endTime={endTime}
+                      location="Daniela Clinic"
+                      options={["Apple", "Google", "Outlook.com"]}
+                      timeZone="Asia/Jerusalem"
+                      description={contact.note}
+                      hideTextLabelButton={isPhoneView}
+                      label="הוספה ליומן"
+                      onClick={() => handleAddToCalendar(contact)}
+                    />
+                    {contact.status !== "confirmed" && (
+                      <Button
+                        variant="contained"
+                        onClick={() => handleConfirmAppointment(contact)}
+                        style={{ marginTop: "8px" }}
+                      >
+                        אישור תור
+                      </Button>
+                    )}
+                  </Box>
+                </>
               ) : (
                 <Typography className={styles.errorText}>
                   Invalid time format for {contact.name}

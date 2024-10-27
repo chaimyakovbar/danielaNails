@@ -8,9 +8,11 @@ const validatePostUser = validScema(userSchema);
 const deleteUsersHandler = require("../handlers/users/deleteUsers");
 const postUsersHandler = require("../handlers/users/postUsers");
 const getUsersByIdHandler = require("../handlers/users/getUsers");
+const updateUserHandler = require("../handlers/users/updateUsers");
 
 router.get("/", getUsersByIdHandler);
-router.delete("/delete/:id", deleteUsersHandler);
+router.delete("/:id", deleteUsersHandler);
 router.post("/", validatePostUser, postUsersHandler);
+router.put("/:id", updateUserHandler);
 
 module.exports = router;

@@ -8,7 +8,7 @@ import image2 from "../../assets/images/nail-head-1.png";
 import image3 from "../../assets/images/nail-head-2.jpg";
 import image4 from "../../assets/images/nail-head-3.jpg";
 
-const CardProduct = () => {
+const CarouselImages = () => {
   return (
     <div className={styles.cardProductContainer}>
       <div className={styles.cardProductInnerContainer}>
@@ -16,6 +16,7 @@ const CardProduct = () => {
           <Carousel
             showArrows={true}
             showThumbs={false}
+            showStatus={false}
             infiniteLoop={true}
             autoPlay={true}
             interval={3000}
@@ -61,4 +62,4 @@ const itemData = [
   },
 ];
 
-export default CardProduct;
+export default CarouselImages;

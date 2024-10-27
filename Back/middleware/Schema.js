@@ -7,6 +7,7 @@ const userSchema = Joi.object().keys({
     .pattern(/^[0-9]+$/)
     .required(),
   note: Joi.string().optional().allow(""),
+  status: Joi.string().valid("pending", "confirmed").required(),
 });
 
 const feedbackSchema = Joi.object().keys({
