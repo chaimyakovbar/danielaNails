@@ -1,18 +1,18 @@
-import React from "react";
-import CardProduct from "../helpers/CardProduct";
-import SocialNetworks from "../helpers/SocialNetworks";
-import AccessibilityMenu from "../helpers/AccessibilityMenu";
-import TimeSelection from "../helpers/TimeSelection";
-import FeedbackList from "./FeedbackList";
-import Works from "./Works";
+import React from "react"
+import Works from "./Works"
+import FeedbackList from "./FeedbackList"
+import PickerTime from "../helpers/PickerTime"
+import CardProduct from "../helpers/CardProduct"
+import SocialNetworks from "../helpers/SocialNetworks"
+import AccessibilityMenu from "../helpers/AccessibilityMenu"
 
 const MainPage = () => {
   return (
-    <div>
+    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
       <AccessibilityMenu />
       <CardProduct />
-      <TimeSelection />
-      <Works />
+      <PickerTime/>
+      <Works/>
       <FeedbackList />
       <SocialNetworks />
     </div>

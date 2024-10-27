@@ -40,7 +40,7 @@ const Auth = () => {
     };
 
     checkAuth();
-  }, [setIsAuthenticated]);
+  }, [navigate, setIsAuthenticated]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
