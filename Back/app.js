@@ -25,8 +25,7 @@ initServer();
 const createServer = async () => {
   app.use(
     cors({
-      // origin: "https://daniela-clinic.netlify.app",
-      origin: "http://localhost:3000",
+      origin: "https://daniela-clinic.netlify.app",
       credentials: true,
     })
   );
