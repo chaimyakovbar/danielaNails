@@ -4,16 +4,6 @@ const baseurl = "https://daniela-clinic.onrender.com/users";
 
 export const getUsers = async () => await axios.get(baseurl);
 
-export const getUsersTime = async () => {
-  const response = await axios.get(baseurl);
-  return response.data.map((user) => user.time);
-};
-
-export const getUsersStatus = async () => {
-  const response = await axios.get(baseurl);
-  return response.data.map((user) => user.status);
-};
-
 export const postUsers = async (data) => {
   return await axios.post(baseurl, data);
 };

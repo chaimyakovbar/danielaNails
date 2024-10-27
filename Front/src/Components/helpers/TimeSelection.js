@@ -6,7 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import styles from "../../styles/style.module.css";
-import { getUsersTime, getUsers } from "../../api/user";
+import { getUsers } from "../../api/user";
 import HorizontalTimePicker from "./HorizontalTimePicker";
 
 const TimeSelection = () => {
@@ -32,44 +32,37 @@ const TimeSelection = () => {
       }
     };
 
-    fetchOccupiedTimes();
-  }, []);
+    const generateDailyAvailableTimes = () => {
+      const dailyTimes = {};
+      const startHour = 9;
+      const endHour = 17;
 
-  const generateDailyAvailableTimes = () => {
-    const dailyTimes = {};
-    const startHour = 9;
-    const endHour = 17;
+      for (let day = 0; day < 7; day++) {
+        const date = dayjs().add(day, "day").startOf("day");
+        const formattedDate = date.format("MMMM D, YYYY");
 
-    for (let day = 0; day < 7; day++) {
-      const date = dayjs().add(day, "day").startOf("day");
-      const formattedDate = date.format("MMMM D, YYYY");
+        dailyTimes[formattedDate] = [];
+        for (let hour = startHour; hour < endHour; hour++) {
+          for (let minute = 0; minute < 60; minute += 30) {
+            const time = date.hour(hour).minute(minute);
+            const formattedDateTime = `${formattedDate} at ${time.format("H:mm")}`;
 
-      dailyTimes[formattedDate] = [];
-      for (let hour = startHour; hour < endHour; hour++) {
-        for (let minute = 0; minute < 60; minute += 30) {
-          const time = date.hour(hour).minute(minute);
-          const formattedDateTime = `${formattedDate} at ${time.format(
-            "H:mm"
-          )}`;
-
-          if (!occupiedTimes.includes(formattedDateTime)) {
-            dailyTimes[formattedDate].push(time);
+            if (!occupiedTimes.includes(formattedDateTime)) {
+              dailyTimes[formattedDate].push(time);
+            }
           }
         }
-      }
 
-      if (dailyTimes[formattedDate].length === 0) {
-        dailyTimes[formattedDate] = ["No available times"];
+        if (dailyTimes[formattedDate].length === 0) {
+          dailyTimes[formattedDate] = ["No available times"];
+        }
       }
-    }
-    setDailyAvailableTimes(dailyTimes);
-  };
+      setDailyAvailableTimes(dailyTimes);
+    };
 
-  useEffect(() => {
-    if (occupiedTimes.length > 0) {
-      generateDailyAvailableTimes();
-    }
-  }, [occupiedTimes]);
+    fetchOccupiedTimes();
+    generateDailyAvailableTimes();
+  }, [occupiedTimes]); // Add occupiedTimes as a dependency
 
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
